@@ -1,0 +1,102 @@
+:root{
+    --black: #211e32;
+    --danger: #fe4e56;
+    --green: #5afe72;
+    --white: #ffffff;
+    --yellow: #fbff22;
+    --dark: #2a2f42;
+    --purple: #9a3bba;
+}
+
+@property --rotate{
+    syntax:  "<angle>";
+    initial-value: 0deg;
+    inherits: true;
+}
+
+body{
+    overflow: hidden;
+    background-color: var(--dark);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card{
+    width: 300px;
+    height: 450px;
+    position: relative;
+    background-color: var(--black);
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0 100px 0 100px;
+}
+
+.card::before,
+.card::after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: 104%;
+    height: 102%;
+    transform: translate(-2%, -1%);
+    background-image: linear-gradient(var(--rotate), var(--purple), var(--danger));
+    border-radius: 6px;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+
+.card::after{
+    filter: blur(45px);
+}
+
+.card:hover::before,
+.card:hover::after{
+    animation: spin 1.5s linear infinite;
+    opacity: 1;
+}
+
+@keyframes spin{
+    0%{
+        --rotate: 0deg;
+    }100%{
+        --rotate: 360deg;
+    }
+}
+
+
+img:nth-child(1){
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    left: 0;
+    top: 0;
+    transition: opacity 0.5s;
+}
+
+.card:hover img:nth-child(1){
+    opacity: 0;
+}
+
+img:nth-child(2){
+    position: absolute;
+    width: 150%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s;
+    left: -50%;
+    top: 0;
+}
+
+.card:hover img:nth-child(2){
+    opacity: 1;
+}
+
+.card1:hover{
+    background-color: transparent;
+}
